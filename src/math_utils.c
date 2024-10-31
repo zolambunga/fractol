@@ -6,7 +6,7 @@
 /*   By: zombunga <zombunga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 14:29:31 by zombunga          #+#    #+#             */
-/*   Updated: 2024/10/31 15:56:17 by zombunga         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:33:35 by zombunga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ t_scale	ft_set_scale(int new_min, int new_max, int old_min, int old_max)
 	return (scale);
 }
 
-t_complex	sum_complex(t_complex z1, t_complex z2)
+t_complex	sum_complex(t_complex z, t_complex c)
 {
 	t_complex	result;
 
-	result.x = z1.x + z2.x;
-	result.y = z1.y + z2.y;
+	result.x = z.x + c.x;
+	result.y = z.y + c.y;
 	return (result);
 }
 

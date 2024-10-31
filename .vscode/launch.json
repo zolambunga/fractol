@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": ["julia", "0.35", "0.35"],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "cwd": "/nfs/homes/zombunga/sgoinfre/estudo/fract-olaa",
+      "program": "/nfs/homes/zombunga/sgoinfre/estudo/fract-olaa/fractol",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}

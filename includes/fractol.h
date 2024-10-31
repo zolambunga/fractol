@@ -6,7 +6,7 @@
 /*   By: zombunga <zombunga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 14:02:21 by zombunga          #+#    #+#             */
-/*   Updated: 2024/10/31 08:46:03 by zombunga         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:29:41 by zombunga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ double		map(double unscaled_num, t_scale scale);
 
 t_scale		ft_set_scale(int new_min, int new_max, int old_min, int old_max);
 
-t_complex	sum_complex(t_complex z1, t_complex z2);
+t_complex	sum_complex(t_complex z, t_complex c);
 t_complex	square_complex(t_complex z);
 
 #endif
