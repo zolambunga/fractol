@@ -6,7 +6,7 @@
 /*   By: zombunga <zombunga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 12:16:25 by zombunga          #+#    #+#             */
-/*   Updated: 2024/10/31 03:34:09 by zombunga         ###   ########.fr       */
+/*   Updated: 2024/11/02 03:34:41 by zombunga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_strncmp(char *s1, char *s2, int n)
 	return (*s1 - *s2);
 }
 
-double	atodbl(char *s)
+double	ft_atodbl(char *s)
 {
 	long	integer_part;
 	double	fractional_part;

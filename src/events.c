@@ -6,13 +6,13 @@
 /*   By: zombunga <zombunga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 14:46:58 by zombunga          #+#    #+#             */
-/*   Updated: 2024/10/31 14:35:32 by zombunga         ###   ########.fr       */
+/*   Updated: 2024/11/02 04:42:57 by zombunga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-int	close_handler(t_fractal *fractal)
+int	ft_close_handler(t_fractal *fractal)
 {
 	mlx_destroy_image(fractal->mlx_connection, fractal->img.img_ptr);
 	mlx_destroy_window(fractal->mlx_connection, fractal->mlx_window);
@@ -21,10 +21,10 @@ int	close_handler(t_fractal *fractal)
 	exit(1);
 }
 
-int	key_handler(int keysym, t_fractal *fractal)
+int	ft_key_handler(int keysym, t_fractal *fractal)
 {
 	if (keysym == XK_Escape)
-		close_handler(fractal);
+		ft_close_handler(fractal);
 	if (keysym == XK_Left)
 		fractal->shift_x -= (0.5 * fractal->zoom);
 	else if (keysym == XK_Right)
@@ -33,27 +33,27 @@ int	key_handler(int keysym, t_fractal *fractal)
 		fractal->shift_y += (0.5 * fractal->zoom);
 	else if (keysym == XK_Down)
 		fractal->shift_y -= (0.5 * fractal->zoom);
-	else if (keysym == XK_plus)
+	else if (keysym == XK_KP_Add)
 		fractal->iterations_defintion += 10;
-	else if (keysym == XK_minus)
+	else if (keysym == XK_KP_Subtract)
 		fractal->iterations_defintion -= 10;
-	fractal_render(fractal);
+	ft_fractal_render(fractal);
 	return (0);
 }
 
-int	mouse_handler(int button, int x, int y, t_fractal *fractal)
+int	ft_mouse_handler(int button, int x, int y, t_fractal *fractal)
 {
-	if (button == Button5)
+	if (button == Button4)
 		fractal->zoom *= 0.95;
-	else if (button == Button4)
+	else if (button == Button5)
 		fractal->zoom *= 1.05;
-	fractal_render(fractal);
-	x++;
-	y++;
+	(void)x;
+	(void)y;
+	ft_fractal_render(fractal);
 	return (0);
 }
 
-int	julia_track(int x, int y, t_fractal *fractal)
+int	ft_julia_track(int x, int y, t_fractal *fractal)
 {
 	t_scale	scalex;
 	t_scale	scaley;
@@ -62,9 +62,11 @@ int	julia_track(int x, int y, t_fractal *fractal)
 	scaley = ft_set_scale(2, -2, 0, HEIGHT);
 	if (!ft_strncmp(fractal->name, "julia", 5))
 	{
-		fractal->julia_x = (map(x, scalex) * fractal->zoom) + fractal->shift_x;
-		fractal->julia_y = (map(y, scaley) * fractal->zoom) + fractal->shift_y;
-		fractal_render(fractal);
+		fractal->julia_x = (ft_map(x, scalex) * fractal->zoom)
+			+ fractal->shift_x;
+		fractal->julia_y = (ft_map(y, scaley) * fractal->zoom)
+			+ fractal->shift_y;
+		ft_fractal_render(fractal);
 	}
 	return (0);
 }

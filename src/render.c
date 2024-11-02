@@ -6,13 +6,13 @@
 /*   By: zombunga <zombunga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 14:23:27 by zombunga          #+#    #+#             */
-/*   Updated: 2024/10/31 03:34:35 by zombunga         ###   ########.fr       */
+/*   Updated: 2024/11/02 11:43:19 by zombunga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-static void	my_pixel_put(int x, int y, t_img *img, int color)
+static void	ft_pixel_put(int x, int y, t_image *img, int color)
 {
 	int	offset;
 
@@ -20,7 +20,7 @@ static void	my_pixel_put(int x, int y, t_img *img, int color)
 	*(unsigned int *)(img->pixels_ptr + offset) = color;
 }
 
-static int	color_gradient(int iteration, int max_iterations)
+static int	ft_color_gradient(int iteration, int max_iterations)
 {
 	int		r;
 	int		g;
@@ -34,7 +34,7 @@ static int	color_gradient(int iteration, int max_iterations)
 	return (r << 16 | g << 8 | b);
 }
 
-static void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractal *fractal)
+static void	ft_mandel_vs_julia(t_complex *z, t_complex *c, t_fractal *fractal)
 {
 	if (!ft_strncmp(fractal->name, "julia", 5))
 	{
@@ -48,7 +48,7 @@ static void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractal *fractal)
 	}
 }
 
-static void	handle_pixel(int x, int y, t_fractal *fractal, int i)
+static void	ft_handle_pixel(int x, int y, t_fractal *fractal, int i)
 {
 	int			color;
 	t_scale		scalex;
@@ -58,24 +58,24 @@ static void	handle_pixel(int x, int y, t_fractal *fractal, int i)
 
 	scalex = ft_set_scale(-2, 2, 0, WIDTH);
 	scaley = ft_set_scale(2, -2, 0, HEIGHT);
-	z.x = (map(x, scalex) * fractal->zoom) + fractal->shift_x;
-	z.y = (map(y, scaley) * fractal->zoom) + fractal->shift_y;
-	mandel_vs_julia(&z, &c, fractal);
+	z.x = (ft_map(x, scalex) * fractal->zoom) + fractal->shift_x;
+	z.y = (ft_map(y, scaley) * fractal->zoom) + fractal->shift_y;
+	ft_mandel_vs_julia(&z, &c, fractal);
 	while (i < fractal->iterations_defintion)
 	{
-		z = sum_complex(square_complex(z), c);
+		z = ft_sum_complex(ft_square_complex(z), c);
 		if ((z.x * z.x) + (z.y * z.y) > fractal->escape_value)
 		{
-			color = color_gradient(i, fractal->iterations_defintion);
-			my_pixel_put(x, y, &fractal->img, color);
+			color = ft_color_gradient(i, fractal->iterations_defintion);
+			ft_pixel_put(x, y, &fractal->img, color);
 			return ;
 		}
 		++i;
 	}
-	my_pixel_put(x, y, &fractal->img, BLACK);
+	ft_pixel_put(x, y, &fractal->img, BLACK);
 }
 
-void	fractal_render(t_fractal *fractal)
+void	ft_fractal_render(t_fractal *fractal)
 {
 	int	x;
 	int	y;
@@ -85,7 +85,7 @@ void	fractal_render(t_fractal *fractal)
 	{
 		x = -1;
 		while (++x < WIDTH)
-			handle_pixel(x, y, fractal, 0);
+			ft_handle_pixel(x, y, fractal, 0);
 	}
 	mlx_put_image_to_window(fractal->mlx_connection, fractal->mlx_window,
 		fractal->img.img_ptr, 0, 0);
